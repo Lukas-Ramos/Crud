@@ -1,6 +1,6 @@
 # Crud
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
+Esse projeto foi feito em Angular [Angular CLI](https://github.com/angular/angular-cli) na versão 18.2.11.
 
 ## Development server
 
