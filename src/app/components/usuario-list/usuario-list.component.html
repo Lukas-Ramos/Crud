@@ -1,0 +1,72 @@
+
+   <!-- usuario-list.component.html -->
+   <div class="container">
+    <div class="header">
+      <h1>Lista de Usuários</h1>
+    </div>
+  
+    <div class="table-container">
+      <div *ngIf="usuarios.length > 0; else noData">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>UF</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios; let i = index">
+              <td>{{ usuario.nome }}</td>
+              <td>{{ usuario.cpf }}</td>
+              <td>{{ usuario.uf }}</td>
+              <td>
+                <button (click)="editUsuario(i)">Editar</button>
+                <button (click)="deleteUsuario(usuario.id)">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noData>
+        <p>Sem dados para exibir</p>
+      </ng-template>
+    </div>
+  
+    <div class="form-container">
+      <form (ngSubmit)="saveUsuario()">
+        <label for="nome">Nome</label>
+        <input
+          type="text"
+          id="nome"
+          [(ngModel)]="nome"
+          name="nome"
+          placeholder="Digite o nome"
+          required
+        />
+  
+        <label for="cpf">CPF</label>
+        <input
+          type="text"
+          id="cpf"
+          [(ngModel)]="cpf"
+          name="cpf"
+          placeholder="Digite o CPF"
+          required
+        />
+  
+        <label for="uf">UF</label>
+        <select id="uf" [(ngModel)]="uf" name="uf" required>
+          <option value="" disabled selected>Selecione a UF</option>
+          <option *ngFor="let uf of ufs" [value]="uf">{{ uf }}</option>
+        </select>
+  
+        <button type="submit">Salvar</button>
+        <button type="button" (click)="clearForm()" *ngIf="editIndex !== null">
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+  

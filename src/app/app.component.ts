@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';  // Importando o RouterModule
+import { UsuarioListComponent } from './components/usuario-list/usuario-list.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [UsuarioListComponent, RouterModule]  // Adicionando RouterModule
 })
 export class AppComponent {
-  title = 'Crud';
+  title = 'Angular CRUD';
 }
