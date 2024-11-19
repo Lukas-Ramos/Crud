@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/services/usuario.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Import necessário para [(ngModel)]
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-usuario-list',
   templateUrl: './usuario-list.component.html',
   styleUrls: ['./usuario-list.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule] // Adicionando CommonModule e FormsModule
+  imports: [CommonModule, FormsModule] 
 })
 export class UsuarioListComponent implements OnInit {
 
@@ -47,7 +47,8 @@ export class UsuarioListComponent implements OnInit {
   ];
   ufInput: string = '';
   filteredUfs: string[] = [];
-  editIndex: number | null = null; // Controla se estamos editando
+  editIndex: number | null = null;
+  ufsopen: boolean = false;
 
   constructor(private usuarioService: UsuarioService) { }
 
@@ -55,14 +56,12 @@ export class UsuarioListComponent implements OnInit {
     this.loadUsuarios();
   }
 
-  // Carrega os usuários da API
   loadUsuarios(): void {
     this.usuarioService.getUsuarios().subscribe((data: any[]) => {
       this.usuarios = data;
     });
   }
-
-  // Salva ou atualiza um usuário
+//  Salvando i atualizando 
   saveUsuario(): void {
     const usuario = {
       nome: this.nome,
@@ -103,26 +102,35 @@ export class UsuarioListComponent implements OnInit {
     this.uf = '';
     this.editIndex = null;
   }
-   // FILTRO CASEIRO PARA SELECT CASEIRO MANUAL QUASE FUNCIONAL, OU ENTAO, FUNCIONAL!
-   filterUfs(): void {
+
+  filterUfs(): void {
     const searchTerm = this.uf.toLowerCase();
     if (searchTerm) {
       this.filteredUfs = this.ufs.filter(uf => uf.toLowerCase().includes(searchTerm));
     } else {
-      this.showAllUfs(); // Mostra todas se o campo estiver vazio
+      this.filteredUfs = this.ufs;
     }
   }
+
   selectUf(uf: string): void {
     this.uf = uf; 
     this.filteredUfs = []; 
+    this.ufsopen = false; 
   }
+
   showAllUfs(): void {
     this.filteredUfs = this.ufs; 
   }
+
   
   hideUfs(): void {
     setTimeout(() => {
       this.filteredUfs = []; 
-    }, 200); 
+      this.ufsopen = false; 
+    }, 100); 
+  }
+
+  toggleUfs(): void {
+    this.ufsopen = !this.ufsopen; 
   }
 }

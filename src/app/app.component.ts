@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';  // Importando o RouterModule
+import { RouterModule } from '@angular/router'; 
 import { UsuarioListComponent } from './components/usuario-list/usuario-list.component';
 
 @Component({
@@ -7,7 +7,7 @@ import { UsuarioListComponent } from './components/usuario-list/usuario-list.com
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [UsuarioListComponent, RouterModule]  // Adicionando RouterModule
+  imports: [UsuarioListComponent, RouterModule] 
 })
 export class AppComponent {
   title = 'Angular CRUD';
