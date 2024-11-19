@@ -25,11 +25,36 @@
         required
       />
 
+      <!-- AUTOCOMPLET CASEIRO -->
       <label for="uf">UF</label>
+      <div class="autocomplete-container">
+        <input 
+          id="uf" 
+          [(ngModel)]="uf" 
+          (focus)="showAllUfs()" 
+          (blur)="hideUfs()" 
+          (input)="filterUfs()" 
+          placeholder="Selecione a UF" 
+          name="uf" 
+          required 
+          autocomplete="off"
+        />
+       
+        <ul class="suggestions" *ngIf="filteredUfs.length > 0">
+          <li *ngFor="let uf of filteredUfs" (click)="selectUf(uf)">
+            {{ uf }}
+          </li>
+        </ul>
+        <span class="arrow" [class.open]="filteredUfs.length > 0"></span>
+      </div>
+
+ <!-- AUTOCOMPLET CASEIRO -->
+
+      <!-- <label for="uf">UF</label>
       <select id="uf" [(ngModel)]="uf" name="uf" required>
         <option value="" disabled selected>Selecione a UF</option>
         <option *ngFor="let uf of ufs" [value]="uf">{{ uf }}</option>
-      </select>
+      </select> -->
 
       <button type="submit">Salvar</button>
       <button type="button" (click)="clearForm()" *ngIf="editIndex !== null">

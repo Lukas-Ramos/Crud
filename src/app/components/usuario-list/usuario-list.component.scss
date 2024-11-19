@@ -165,3 +165,98 @@ button:hover {
   font-size: 16px;
   color: #999;
 }
+.autocomplete-container {
+  position: relative;
+  width: 300px; /* Ajuste conforme necessário */
+}
+
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #598392;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 1000;
+}
+
+.suggestions li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background: #f0f0f0;
+}
+
+
+
+
+.autocomplete-container {
+  position: relative;
+  width: 200px;
+
+  input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    padding-right: 30px; /* espaço para a seta */
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%) rotate(90deg); /* Inicialmente para a direita */
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid #333; /* Setinha para a direita */
+    transition: transform 0.3s ease; /* Transição suave */
+  }
+
+  .arrow.open {
+    transform: translateY(50%) rotate(0deg); /* Aponta para baixo */
+    border-top: none;
+    border-bottom: 7px solid #333; /* Setinha para baixo */
+  }
+
+  .suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #598392;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #AEC3B0;
+        color: #598392;
+      }
+    }
+  }
+}

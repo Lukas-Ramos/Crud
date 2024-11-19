@@ -16,7 +16,37 @@ export class UsuarioListComponent implements OnInit {
   nome: string = '';
   cpf: string = '';
   uf: string = '';
-  ufs: string[] = ['SP', 'RJ', 'MG', 'ES'];
+  ufs: string[] = [
+    'AC - Acre', 
+    'AL - Alagoas', 
+    'AP - Amapá', 
+    'AM - Amazonas', 
+    'BA - Bahia', 
+    'CE - Ceará', 
+    'DF - Distrito Federal', 
+    'ES - Espírito Santo', 
+    'GO - Goiás', 
+    'MA - Maranhão', 
+    'MT - Mato Grosso', 
+    'MS - Mato Grosso do Sul', 
+    'MG - Minas Gerais', 
+    'PA - Pará', 
+    'PB - Paraíba', 
+    'PR - Paraná', 
+    'PE - Pernambuco', 
+    'PI - Piauí', 
+    'RJ - Rio de Janeiro', 
+    'RN - Rio Grande do Norte', 
+    'RS - Rio Grande do Sul', 
+    'RO - Rondônia', 
+    'RR - Roraima', 
+    'SC - Santa Catarina', 
+    'SP - São Paulo', 
+    'SE - Sergipe', 
+    'TO - Tocantins'
+  ];
+  ufInput: string = '';
+  filteredUfs: string[] = [];
   editIndex: number | null = null; // Controla se estamos editando
 
   constructor(private usuarioService: UsuarioService) { }
@@ -41,13 +71,11 @@ export class UsuarioListComponent implements OnInit {
     };
 
     if (this.editIndex === null) {
-      // Adicionar novo usuário
       this.usuarioService.saveUsuario(usuario).subscribe(() => {
         this.loadUsuarios();
         this.clearForm();
       });
     } else {
-      // Atualizar usuário existente
       const usuarioId = this.usuarios[this.editIndex].id;
       this.usuarioService.updateUsuario(usuarioId, usuario).subscribe(() => {
         this.loadUsuarios();
@@ -56,7 +84,6 @@ export class UsuarioListComponent implements OnInit {
     }
   }
 
-  // Preenche o formulário para edição
   editUsuario(index: number): void {
     const usuario = this.usuarios[index];
     this.nome = usuario.nome;
@@ -65,18 +92,37 @@ export class UsuarioListComponent implements OnInit {
     this.editIndex = index;
   }
 
-  // Exclui um usuário
   deleteUsuario(id: number): void {
     this.usuarioService.deleteUsuario(id).subscribe(() => {
       this.loadUsuarios();
     });
   }
-
-  // Limpa o formulário e reseta o estado de edição
   clearForm(): void {
     this.nome = '';
     this.cpf = '';
     this.uf = '';
     this.editIndex = null;
+  }
+   // FILTRO CASEIRO PARA SELECT CASEIRO MANUAL QUASE FUNCIONAL, OU ENTAO, FUNCIONAL!
+   filterUfs(): void {
+    const searchTerm = this.uf.toLowerCase();
+    if (searchTerm) {
+      this.filteredUfs = this.ufs.filter(uf => uf.toLowerCase().includes(searchTerm));
+    } else {
+      this.showAllUfs(); // Mostra todas se o campo estiver vazio
+    }
+  }
+  selectUf(uf: string): void {
+    this.uf = uf; 
+    this.filteredUfs = []; 
+  }
+  showAllUfs(): void {
+    this.filteredUfs = this.ufs; 
+  }
+  
+  hideUfs(): void {
+    setTimeout(() => {
+      this.filteredUfs = []; 
+    }, 200); 
   }
 }
