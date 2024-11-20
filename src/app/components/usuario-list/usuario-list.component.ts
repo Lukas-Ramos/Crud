@@ -122,14 +122,6 @@ export class UsuarioListComponent implements OnInit {
     this.filteredUfs = this.ufs; 
   }
 
-  
-  hideUfs(): void {
-    setTimeout(() => {
-      this.filteredUfs = []; 
-      this.ufsopen = false; 
-    }, 100); 
-  }
-
   toggleUfs(): void {
     this.ufsopen = !this.ufsopen; 
   }
