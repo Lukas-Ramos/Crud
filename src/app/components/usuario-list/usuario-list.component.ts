@@ -71,8 +71,6 @@ saveUsuario(): void {
   if (!this.nome || !this.cpf || !this.uf) {
     this.erroForm = 'Revise o formulário';
     this.isFadingOut = false;
-
-   
     setTimeout(() => {
       this.isFadingOut = true;  
     }, 2000);  
