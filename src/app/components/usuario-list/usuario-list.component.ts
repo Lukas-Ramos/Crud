@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 export class UsuarioListComponent implements OnInit {
 
   usuarios: any[] = [];
+  modalAberto: boolean = false;
+  idUsuarioDeletado: number | null = null;
   nome: string = '';
   cpf: string = '';
   uf: string = '';
@@ -124,5 +126,22 @@ export class UsuarioListComponent implements OnInit {
 
   toggleUfs(): void {
     this.ufsopen = !this.ufsopen; 
+  }
+  confirmarExclusao(id: number): void {
+    this.idUsuarioDeletado = id;
+    this.modalAberto = true;
+  }
+
+  fechaModal(): void {
+    this.modalAberto = false;
+  }
+
+  exclusaoConfirmada(): void {
+    if (this.idUsuarioDeletado !== null) {
+      this.usuarioService.deleteUsuario(this.idUsuarioDeletado){
+        this.loadUsuarios();
+        this.fechaModal();
+      };
+    }
   }
 }

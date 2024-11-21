@@ -158,6 +158,7 @@ button {
 
 button:hover {
   background-color: #EFF6E0; 
+  color: #598392;
 }
 
 .no-data {
@@ -207,6 +208,8 @@ button:hover {
   font-family: sans-serif;
   font-weight: bold;
 }
+
+
 
 
 .autocomplete-container {
@@ -273,4 +276,29 @@ button:hover {
 .suggestions {
   scrollbar-width: 10px;
   scrollbar-color: #AEC3B0 #598392;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border-radius: 15px;
+  font-family: sans-serif;
+  
+}
+
+.modal-content {
+  background: #AEC3B0;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  color: #598392
 }

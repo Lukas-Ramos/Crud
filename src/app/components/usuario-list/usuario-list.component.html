@@ -71,7 +71,7 @@
               <td>{{ usuario.uf }}</td>
               <td>
                 <button (click)="editUsuario(i)">Editar</button>
-                <button (click)="deleteUsuario(usuario.id)">Excluir</button>
+                <button (click)="confirmarExclusao(usuario.id)">Excluir</button>
               </td>
             </tr>
           </tbody>
@@ -80,6 +80,15 @@
       <ng-template #noData >
         <p class="semDados">Sem dados para exibir</p>
       </ng-template>
+    </div>
+    <div class="modal" *ngIf="modalAberto ">
+      <div class="modal-content">
+        <h3>Tem certeza que deseja excluir este usuário?</h3>
+        <div class="modal-actions buttonModal">
+          <button (click)="exclusaoConfirmada()">Sim</button>
+          <button (click)="fechaModal()">Cancelar</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
