@@ -14,7 +14,6 @@
         placeholder="Digite o nome"
         required
       />
-
       <label for="cpf">CPF</label>
       <input
         type="text"
@@ -27,32 +26,24 @@
 
       <!-- AUTOCOMPLET CASEIRO -->
       <label for="uf">UF</label>
-<div class="autocomplete-container">
-  <input 
-    id="uf" 
-    [(ngModel)]="uf" 
-    (focus)="showAllUfs()" 
-    (input)="filterUfs()" 
-    (click)="toggleUfs()" 
-    placeholder="Selecione a UF " 
-    name="uf" 
-  />
-  <ul class="suggestions" *ngIf="ufsopen && filteredUfs.length > 0">
-    <li *ngFor="let uf of filteredUfs" (click)="selectUf(uf)">
-      {{ uf }}
-    </li>
-  </ul>
-  <span class="arrow" [class.open]="ufsopen"></span>
-</div>
-
-
+      <div class="autocomplete-container" >
+      <input 
+        id="uf" 
+        [(ngModel)]="uf" 
+        (focus)="showAllUfs()" 
+        (input)="filterUfs()" 
+        (click)="toggleUfs()" 
+        placeholder="Selecione a UF " 
+        name="uf" 
+      />
+      <ul class="suggestions" *ngIf="ufsopen && filteredUfs.length > 0">
+        <li *ngFor="let uf of filteredUfs" (click)="selectUf(uf)">
+          {{ uf }}
+        </li>
+      </ul>
+      <span class="arrow" [class.open]="ufsopen"></span>
+      </div>
  <!-- AUTOCOMPLET CASEIRO -->
-
-      <!-- <label for="uf">UF</label>
-      <select id="uf" [(ngModel)]="uf" name="uf" required>
-        <option value="" disabled selected>Selecione a UF</option>
-        <option *ngFor="let uf of ufs" [value]="uf">{{ uf }}</option>
-      </select> -->
 
       <button type="submit">Salvar</button>
       <button type="button" (click)="clearForm()" *ngIf="editIndex !== null">
@@ -86,8 +77,8 @@
           </tbody>
         </table>
       </div>
-      <ng-template #noData>
-        <p>Sem dados para exibir</p>
+      <ng-template #noData >
+        <p class="semDados">Sem dados para exibir</p>
       </ng-template>
     </div>
   </div>

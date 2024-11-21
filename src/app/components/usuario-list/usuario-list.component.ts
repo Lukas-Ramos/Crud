@@ -104,12 +104,12 @@ export class UsuarioListComponent implements OnInit {
   }
 
   filterUfs(): void {
-    const searchTerm = this.uf.toLowerCase();
-    if (searchTerm) {
-      this.filteredUfs = this.ufs.filter(uf => uf.toLowerCase().includes(searchTerm));
+    const filtroUf = this.uf.toLowerCase();
+    if (filtroUf) {
+      this.filteredUfs = this.ufs.filter(uf => uf.toLowerCase().includes(filtroUf));
     } else {
       this.filteredUfs = this.ufs;
-    }
+    } 
   }
 
   selectUf(uf: string): void {
