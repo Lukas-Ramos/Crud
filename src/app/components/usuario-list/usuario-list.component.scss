@@ -302,3 +302,62 @@ button:hover {
   text-align: center;
   color: #598392
 }
+.alert {
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  background-color: olive; /* Fundo verde oliva */
+  color: yellow;          /* Fonte amarela */
+  border: 1px solid darkolivegreen;
+}
+
+.alert small {
+  display: block;
+}
+.text-danger small {
+  color: #dc3545;
+  font-weight: bold;
+}
+.autocomplete-container ul {
+  border: 1px solid #ced4da;
+  max-height: 150px;
+  overflow-y: auto;
+}
+.erroForm {
+  background-color: #ffc300;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 22px;
+  height: 100px;
+  align-items: center;
+  color: #1b263b;
+  display: flex;
+  font-weight: bold;
+  justify-content: center;
+  font-family: "Silkscreen", sans-serif;
+  opacity: 1;
+  transition: opacity 2s ease-out;  
+}
+.erroForm.fadeOut {
+  opacity: 0;
+}
+
+.btn-error {
+  animation: shake 0.5s ease-out;
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

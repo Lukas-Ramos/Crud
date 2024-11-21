@@ -4,38 +4,17 @@
     <h1>Cadastrar usuário</h1>
   </div>
   <div class="form-container">
-    <form (ngSubmit)="saveUsuario()">
+    <form (ngSubmit)="saveUsuario()" id="form" name="formulario">
       <label for="nome">Nome</label>
-      <input
-        type="text"
-        id="nome"
-        [(ngModel)]="nome"
-        name="nome"
-        placeholder="Digite o nome"
-        required
-      />
+      <input ype="text" id="nome" [(ngModel)]="nome"name="nome" placeholder="Digite o nome" minlength="3" maxlength="20"  required />  
       <label for="cpf">CPF</label>
-      <input
-        type="text"
-        id="cpf"
-        [(ngModel)]="cpf"
-        name="cpf"
-        placeholder="Digite o CPF"
-        required
-      />
+      <input type="text" id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="Digite o CPF" maxlength="11"  required />
+      
 
       <!-- AUTOCOMPLET CASEIRO -->
       <label for="uf">UF</label>
       <div class="autocomplete-container" >
-      <input 
-        id="uf" 
-        [(ngModel)]="uf" 
-        (focus)="showAllUfs()" 
-        (input)="filterUfs()" 
-        (click)="toggleUfs()" 
-        placeholder="Selecione a UF " 
-        name="uf" 
-      />
+      <input  id="uf"  [(ngModel)]="uf"  (focus)="showAllUfs()"  (input)="filterUfs()"  (click)="toggleUfs()"  placeholder="Selecione a UF "  name="uf"  />
       <ul class="suggestions" *ngIf="ufsopen && filteredUfs.length > 0">
         <li *ngFor="let uf of filteredUfs" (click)="selectUf(uf)">
           {{ uf }}
@@ -43,9 +22,20 @@
       </ul>
       <span class="arrow" [class.open]="ufsopen"></span>
       </div>
- <!-- AUTOCOMPLET CASEIRO -->
+       <!-- AUTOCOMPLET CASEIRO -->
 
-      <button type="submit">Salvar</button>
+      <!-- modal de erro -->
+      <div *ngIf="erroForm" [ngClass]="{'erroForm': true, 'fadeOut': isFadingOut}">
+        {{ erroForm }}
+      </div>
+      <!-- modal de erro -->
+      
+      <button 
+        type="submit" 
+        class="btn btn-primary" 
+        [ngClass]="{'btn-error': erroForm}">
+        Salvar
+      </button>
       <button type="button" (click)="clearForm()" *ngIf="editIndex !== null">
         Cancelar
       </button>

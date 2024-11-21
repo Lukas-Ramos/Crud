@@ -17,6 +17,12 @@ export class UsuarioListComponent implements OnInit {
   idUsuarioDeletado: number | null = null;
   nome: string = '';
   cpf: string = '';
+  erroForm: string | null = null;
+  isFadingOut: boolean = false;
+  erroCpf: string | null = null;
+  ufsopen: boolean = false;
+  filteredUfs: string[] = [];
+  editIndex: number | null = null;
   uf: string = '';
   ufs: string[] = [
     'AC - Acre', 
@@ -48,9 +54,6 @@ export class UsuarioListComponent implements OnInit {
     'TO - Tocantins'
   ];
   ufInput: string = '';
-  filteredUfs: string[] = [];
-  editIndex: number | null = null;
-  ufsopen: boolean = false;
 
   constructor(private usuarioService: UsuarioService) { }
 
@@ -64,27 +67,44 @@ export class UsuarioListComponent implements OnInit {
     });
   }
 //  Salvando i atualizando 
-  saveUsuario(): void {
-    const usuario = {
-      nome: this.nome,
-      cpf: this.cpf,
-      uf: this.uf
-    };
+saveUsuario(): void {
+  if (!this.nome || !this.cpf || !this.uf) {
+    this.erroForm = 'Revise o formulário';
+    this.isFadingOut = false;
 
-    if (this.editIndex === null) {
-      this.usuarioService.saveUsuario(usuario).subscribe(() => {
-        this.loadUsuarios();
-        this.clearForm();
-      });
-    } else {
-      const usuarioId = this.usuarios[this.editIndex].id;
-      this.usuarioService.updateUsuario(usuarioId, usuario).subscribe(() => {
-        this.loadUsuarios();
-        this.clearForm();
-      });
-    }
+   
+    setTimeout(() => {
+      this.isFadingOut = true;  
+    }, 2000);  
+    setTimeout(() => {
+      this.erroForm = null;
+      this.isFadingOut = false;  
+    }, 4000); 
+
+    return;
   }
 
+  this.erroForm = null; 
+  const usuario = {
+    nome: this.nome,
+    cpf: this.cpf,
+    uf: this.uf
+  };
+  
+
+  if (this.editIndex === null) {
+    this.usuarioService.saveUsuario(usuario).subscribe(() => {
+      this.loadUsuarios();
+      this.clearForm();
+    });
+  } else {
+    const usuarioId = this.usuarios[this.editIndex].id;
+    this.usuarioService.updateUsuario(usuarioId, usuario).subscribe(() => {
+      this.loadUsuarios();
+      this.clearForm();
+    });
+  }
+}
   editUsuario(index: number): void {
     const usuario = this.usuarios[index];
     this.nome = usuario.nome;
@@ -92,7 +112,6 @@ export class UsuarioListComponent implements OnInit {
     this.uf = usuario.uf;
     this.editIndex = index;
   }
-
   deleteUsuario(id: number): void {
     this.usuarioService.deleteUsuario(id).subscribe(() => {
       this.loadUsuarios();
@@ -104,7 +123,6 @@ export class UsuarioListComponent implements OnInit {
     this.uf = '';
     this.editIndex = null;
   }
-
   filterUfs(): void {
     const filtroUf = this.uf.toLowerCase();
     if (filtroUf) {
@@ -113,17 +131,14 @@ export class UsuarioListComponent implements OnInit {
       this.filteredUfs = this.ufs;
     } 
   }
-
   selectUf(uf: string): void {
     this.uf = uf; 
     this.filteredUfs = []; 
     this.ufsopen = false; 
   }
-
   showAllUfs(): void {
     this.filteredUfs = this.ufs; 
   }
-
   toggleUfs(): void {
     this.ufsopen = !this.ufsopen; 
   }
@@ -131,11 +146,9 @@ export class UsuarioListComponent implements OnInit {
     this.idUsuarioDeletado = id;
     this.modalAberto = true;
   }
-
   fechaModal(): void {
     this.modalAberto = false;
   }
-
   exclusaoConfirmada(): void {
     if (this.idUsuarioDeletado !== null) {
       this.usuarioService.deleteUsuario(this.idUsuarioDeletado).subscribe(() => {
