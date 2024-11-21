@@ -138,10 +138,10 @@ export class UsuarioListComponent implements OnInit {
 
   exclusaoConfirmada(): void {
     if (this.idUsuarioDeletado !== null) {
-      this.usuarioService.deleteUsuario(this.idUsuarioDeletado){
+      this.usuarioService.deleteUsuario(this.idUsuarioDeletado).subscribe(() => {
         this.loadUsuarios();
         this.fechaModal();
-      };
+      });
     }
   }
 }
